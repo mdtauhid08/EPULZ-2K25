@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo:wght@300;400;500;600;700&family=Audiowide&display=swap" rel="stylesheet">
+    <title>EPULZ'25 - Cyberpunk Symposium</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Audiowide&family=Exo+2:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollSmoother.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+    <script src="https://kit.fontawesome.com/XXXXXXXXXX.js" crossorigin="anonymous"></script> <!-- Replace with your actual kit code -->
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/interactive.css">
+    <link rel="stylesheet" href="css/hero.css">
+    <link rel="stylesheet" href="css/cursor.css">
+    <link rel="stylesheet" href="css/advanced-interactive.css">
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader">
+        <div class="loader-content">
+            <div class="loader-logo">EPULZ'25</div>
+            <div class="loader-progress">
+                <div class="progress-bar"></div>
+            </div>
+            <div class="loader-text">System Initializing<span class="dots"></span></div>
+        </div>
+        <div class="loader-scanlines"></div>
+    </div>
+
+    <!-- Main Content Wrapper -->
+    <div id="smooth-wrapper">
+        <div id="smooth-content">
+            <nav class="main-nav">
+                <div class="navbar">
+                    <div class="nav-logo">EPULZ'25</div>
+                    <div class="nav-links">
+                        <a href="#about" class="nav-link">About</a>
+                        <a href="#technical" class="nav-link">Technical</a>
+                        <a href="#non-technical" class="nav-link">Non-Technical</a>
+                        <a href="#contact" class="nav-link">Contact</a>
+                        <a href="#register" class="nav-link register">Register</a>
+                    </div>
+                </div>
+            </nav>
+            <!-- EPULZ'25 Logo -->
+            <div class="hero-logo" style="margin-top: 100px;">
+                <div class="logo-part cyan">EPUL</div>
+                <div class="logo-part magenta">Z'25</div>
+            </div>
+            <!-- Hero Section -->
+            <section id="hero" class="hero-section" data-scroll-section>
+                <!-- 3D Grid Background -->
+                <canvas id="grid-canvas"></canvas>
+                <!-- Hero Content -->
+                <div class="hero-content">
+                    <div class="hero-description">
+                        <div class="symposium-tagline">
+                            <p class="tagline-text">
+                                <span class="tagline-bullet"></span>
+                                A National Level Symposium conducted by the ECE Department,
+                            </p>
+                            <!-- Removed the event timing text to maintain layout integrity -->
+                            <div class="institute-name-container">
+                                <span class="institute-name">
+                                    <span class="glowing-text">Thanthai Periyar Government</span>
+                                </span>
+                                <span class="institute-name">
+                                    <span class="glowing-text">Institute of Technology - Vellore</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <style>
+                        .institute-name-container {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            gap: 0.5rem;
+                            margin-top: 1rem;
+                        }
+                        .institute-name {
+                            font-family: 'Orbitron', sans-serif;
+                            font-size: 1.8rem;
+                            font-weight: 600;
+                            letter-spacing: 2px;
+                            line-height: 1.4;
+                            text-align: center;
+                        }
+                        .glowing-text {
+                            color: #00f2ff;
+                            text-shadow: 0 0 15px rgba(0, 242, 255, 0.7),
+                                       0 0 30px rgba(0, 242, 255, 0.4);
+                            animation: textGlow 2s infinite;
+                        }
+                        @keyframes textGlow {
+                            0%, 100% {
+                                text-shadow: 0 0 15px rgba(0, 242, 255, 0.7),
+                                           0 0 30px rgba(0, 242, 255, 0.4);
+                            }
+                            50% {
+                                text-shadow: 0 0 20px rgba(0, 242, 255, 0.9),
+                                           0 0 40px rgba(0, 242, 255, 0.6);
+                            }
+                        }
+                        @media (max-width: 768px) {
+                            .institute-name {
+                                font-size: 1.4rem;
+                            }
+                        }
+                    </style>
+                    <!-- Countdown Timer -->
+                    <div class="countdown-container">
+                        <div class="countdown-grid"></div>
+                        <div class="countdown-unit countdown-days">
+                            <div class="countdown-ring"></div>
+                            <div class="countdown-number">09</div>
+                            <div class="countdown-label">DAYS</div>
+                        </div>
+                        <div class="countdown-unit countdown-hours">
+                            <div class="countdown-ring"></div>
+                            <div class="countdown-number">05</div>
+                            <div class="countdown-label">HOURS</div>
+                        </div>
+                        <div class="countdown-unit countdown-minutes">
+                            <div class="countdown-ring"></div>
+                            <div class="countdown-number">03</div>
+                            <div class="countdown-label">MINUTES</div>
+                        </div>
+                        <div class="countdown-unit countdown-seconds">
+                            <div class="countdown-ring"></div>
+                            <div class="countdown-number">24</div>
+                            <div class="countdown-label">SECONDS</div>
+                        </div>
+                    </div>
+                    <!-- Register Button -->
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSflI1KS_OgE6ykAoJ-EL3t-Vzt5aGnDQLyrUlTwIjJBUsdZ8Q/viewform" class="register-button" target="_blank">
+                        <span class="button-text">Register Now</span>
+                        <div class="button-glitch"></div>
+                    </a>
+                </div>
+
+                <!-- Particles -->
+                <div class="particles"></div>
+            </section>
+            <!-- About Section -->
+            <section id="about" class="about" data-scroll-section>
+                <div class="circuit-background">
+                    <div class="circuit-lines"></div>
+                    <div class="particle-container"></div>
+                </div>
+                <div class="section-content">
+                    <div class="about-header">
+                        <h2 class="section-title glitch-text" data-text="About EPULZ'25">About EPULZ'25</h2>
+                        <div class="title-underline">
+                            <div class="line-glow"></div>
+                        </div>
+                    </div>
+                    <div class="about-grid">
+                        <div class="about-text glass-card">
+                            <div class="card-content">
+                                <p class="neon-text">Welcome to <span class="highlight">EPULZ'25</span>, where the future of technology converges with imagination. Our cyberpunk-themed tech symposium transcends traditional boundaries, offering an immersive journey into tomorrow's innovations.</p>
+                                <p class="neon-text">Experience cutting-edge workshops, mind-bending competitions, and unparalleled networking opportunities in a world where digital dreams become reality.</p>
+                            </div>
+                            <div class="card-overlay"></div>
+                        </div>
+                        <div class="stats-container">
+                            <div class="stat-card glass-card" data-value="2500">
+                                <div class="stat-content">
+                                    <div class="stat-number cyber-glitch">0</div>
+                                    <div class="stat-label">Participants</div>
+                                </div>
+                                <div class="stat-glow"></div>
+                            </div>
+                            <div class="stat-card glass-card" data-value="50">
+                                <div class="stat-content">
+                                    <div class="stat-number cyber-glitch">0</div>
+                                    <div class="stat-label">Events</div>
+                                </div>
+                                <div class="stat-glow"></div>
+                            </div>
+                            <div class="stat-card glass-card" data-value="100">
+                                <div class="stat-content">
+                                    <div class="stat-number cyber-glitch">0</div>
+                                    <div class="stat-label">Speakers</div>
+                                </div>
+                                <div class="stat-glow"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Technical Events -->
+            <section id="technical" class="events technical" data-scroll-section>
+                <div class="grid-background"></div>
+                <div class="section-content">
+                    <h2 class="section-title" data-text="Technical Events">Technical Events</h2>
+                    <div class="events-grid">
+                        <!-- Techtalk Titans -->
+                        <div class="event-card glass-card" data-tilt data-event="techtalk-titans">
+                            <div class="event-icon">
+                                <i class="fas fa-microphone-alt"></i>
+                            </div>
+                            <div class="event-content">
+                                <h3 class="event-title neon-text">Techtalk Titans</h3>
+                                <p class="event-description">Present your innovative ideas and technical knowledge in this platform for aspiring engineers. Deliver concise talks on emerging technologies and research findings.</p>
+                                <div class="event-details">
+                                    <div class="detail"><i class="fas fa-clock"></i> 15 minutes per presentation</div>
+                                    <div class="detail"><i class="fas fa-users"></i> Individual or Pair</div>
+                                </div>
+                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSflI1KS_OgE6ykAoJ-EL3t-Vzt5aGnDQLyrUlTwIjJBUsdZ8Q/viewform" target="_blank" class="register-button">Register</a> <!-- Registration Button -->
+                            </div>
+                            <div class="card-glow"></div>
+                        </div>
+            
+                        <!-- Prototype Parade -->
+                        <div class="event-card glass-card" data-tilt data-event="prototype-parade">
+                            <div class="event-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="event-content">
+                                <h3 class="event-title neon-text">Prototype Parade</h3>
+                                <p class="event-description">Showcase your working prototypes of innovative electronic devices. Projects judged on innovation, technical complexity, and practical application.</p>
+                                <div class="event-details">
+                                    <div class="detail"><i class="fas fa-tools"></i> Bring your own prototype</div>
+                                    <div class="detail"><i class="fas fa-users"></i> 2-4 members</div>
+                                </div>
+                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSflI1KS_OgE6ykAoJ-EL3t-Vzt5aGnDQLyrUlTwIjJBUsdZ8Q/viewform" target="_blank" class="register-button">Register</a> <!-- Registration Button -->
+                            </div>
+                            <div class="card-glow"></div>
+                        </div>
+            
+                        <!-- Bug Slay -->
+                        <div class="event-card glass-card" data-tilt>
+                            <div class="event-icon">
+                                <i class="fas fa-bug"></i>
+                            </div>
+                            <div class="event-content">
+                                <h3 class="event-title neon-text">Bug Slay</h3>
+                                <p class="event-description">Debug electronic circuits and code snippets under time pressure. Test your troubleshooting skills in this intense challenge.</p>
+                                <div class="event-details">
+                                    <div class="detail"><i class="fas fa-clock"></i> 90 minutes</div>
+                                    <div class="detail"><i class="fas fa-user"></i> Individual</div>
+                                </div>
+                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSflI1KS_OgE6ykAoJ-EL3t-Vzt5aGnDQLyrUlTwIjJBUsdZ8Q/viewform" target="_blank" class="register-button">Register</a> <!-- Registration Button -->
+                            </div>
+                            <div class="card-glow"></div>
+                        </div>
+            
+                        <!-- Brain Byte Brawl -->
+                        <div class="event-card glass-card" data-tilt>
+                            <div class="event-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div class="event-content">
+                                <h3 class="event-title neon-text">Brain Byte Brawl</h3>
+                                <p class="event-description">Multi-round technical quiz testing knowledge in electronics, communications, and current tech trends.</p>
+                                <div class="event-details">
+                                    <div class="detail"><i class="fas fa-layer-group"></i> Prelims + Finals</div>
+                                    <div class="detail"><i class="fas fa-users"></i> 2 members</div>
+                                </div>
+                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSflI1KS_OgE6ykAoJ-EL3t-Vzt5aGnDQLyrUlTwIjJBUsdZ8Q/viewform" target="_blank" class="register-button">Register</a> <!-- Registration Button -->
+                            </div>
+                            <div class="card-glow"></div>
+                        </div>
+            
+                        <!-- DeCode-X -->
+                        <div class="event-card glass-card" data-tilt>
+                            <div class="event-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div class="event-content">
+                                <h3 class="event-title neon-text">DeCode-X</h3>
+                                <p class="event-description">Competitive coding challenge focusing on algorithm design and implementation. Solve complex programming problems efficiently.</p>
+                                <div class="event-details">
+                                    <div class="detail"><i class="fas fa-code"></i> C, C++, Python, Java</div>
+                                    <div class="detail"><i class="fas fa-users"></i> Individual or Pair</div>
+                                </div>
+                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSflI1KS_OgE6ykAoJ-EL3t-Vzt5aGnDQLyrUlTwIjJBUsdZ8Q/viewform" target="_blank" class="register-button">Register</a> <!-- Registration Button -->
+                            </div>
+                            <div class="card-glow"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Non-Technical Events Section ends -->
+            </section>
+
+            <!-- Register Section -->
+            <section id="register" class="register" data-scroll-section>
+                <style>
+                    #register {
+                        min-height: 100vh;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        position: relative;
+                        background: linear-gradient(45deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.8));
+                        overflow: hidden;
+                    }
+
+                    .register .section-content {
+                        text-align: center;
+                        z-index: 2;
+                    }
+
+                    .register .section-title {
+                        margin-bottom: 2rem;
+                        color: #fff;
+                        text-shadow: 0 0 15px #00f2ff;
+                    }
+
+                    .main-register {
+                        display: inline-block;
+                        padding: 1.8rem 4rem;
+                        font-size: 1.8rem;
+                        color: #fff;
+                        background: linear-gradient(45deg, #00f2ff, #ff00e4);
+                        border: 2px solid rgba(255, 255, 255, 0.3);
+                        border-radius: 12px;
+                        text-decoration: none;
+                        text-transform: uppercase;
+                        letter-spacing: 3px;
+                        font-family: 'Orbitron', sans-serif;
+                        position: relative;
+                        overflow: hidden;
+                        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                        box-shadow: 0 0 25px rgba(0, 242, 255, 0.5);
+                        animation: neonPulse 2s infinite;
+                    }
+
+                    .main-register:hover {
+                        transform: scale(1.08) translateY(-5px);
+                        box-shadow: 0 0 40px rgba(255, 0, 228, 0.7);
+                        letter-spacing: 5px;
+                    }
+
+                    @keyframes neonPulse {
+                        0% { box-shadow: 0 0 25px rgba(0, 242, 255, 0.5); }
+                        50% { box-shadow: 0 0 40px rgba(255, 0, 228, 0.7), 0 0 60px rgba(0, 242, 255, 0.3); }
+                        100% { box-shadow: 0 0 25px rgba(0, 242, 255, 0.5); }
+                    }
+                </style>
+
+                <div class="section-content">
+                    <h2 class="section-title" data-text="Register">Register</h2>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSflI1KS_OgE6ykAoJ-EL3t-Vzt5aGnDQLyrUlTwIjJBUsdZ8Q/viewform" class="main-register" target="_blank">
+                        <span class="button-text">Register Now</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Contact section -->
+            <section id="contact" class="contact" data-scroll-section>
+                <style>
+                    .contact {
+                        background: linear-gradient(180deg, #0a0a0a, #000000);
+                        padding: 6rem 2rem;
+                        position: relative;
+                        overflow: hidden;
+                    }
+
+                    .contact::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: repeating-linear-gradient(
+                            90deg,
+                            rgba(0, 242, 255, 0.03) 0px,
+                            rgba(0, 242, 255, 0.03) 1px,
+                            transparent 1px,
+                            transparent 20px
+                        );
+                        pointer-events: none;
+                    }
+
+                    .contact-title {
+                        font-family: 'Orbitron', sans-serif;
+                        font-size: 4rem;
+                        color: #00f2ff;
+                        text-align: center;
+                        margin-bottom: 5rem;
+                        text-transform: uppercase;
+                        letter-spacing: 8px;
+                        text-shadow: 0 0 20px rgba(0, 242, 255, 0.8),
+                                   0 0 40px rgba(0, 242, 255, 0.4);
+                        animation: titlePulse 2s infinite;
+                    }
+
+                    .contact-grid {
+                        display: grid;
+                        grid-template-columns: repeat(3, 1fr);
+                        gap: 3rem;
+                        max-width: 1200px;
+                        margin: 0 auto 4rem;
+                        padding: 0 1rem;
+                    }
+
+                    .contact-card {
+                        background: rgba(10, 10, 10, 0.8);
+                        border: 1px solid rgba(0, 242, 255, 0.3);
+                        border-radius: 15px;
+                        padding: 2.5rem;
+                        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                        backdrop-filter: blur(10px);
+                        box-shadow: 0 0 20px rgba(0, 242, 255, 0.1);
+                        transform-style: preserve-3d;
+                    }
+
+                    .contact-card:hover {
+                        transform: translateY(-10px) scale(1.02);
+                        border-color: rgba(0, 242, 255, 0.8);
+                        box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
+                    }
+
+                    .contact-card h3 {
+                        color: #ff00e4;
+                        font-family: 'Orbitron', sans-serif;
+                        font-size: 1.8rem;
+                        margin-bottom: 1.5rem;
+                        text-shadow: 0 0 10px rgba(255, 0, 228, 0.5);
+                    }
+
+                    .contact-info {
+                        color: #ffffff;
+                        font-family: 'Exo', sans-serif;
+                        font-size: 1.1rem;
+                        line-height: 1.8;
+                    }
+
+                    .contact-info a {
+                        color: #00f2ff;
+                        text-decoration: none;
+                        transition: all 0.3s ease;
+                        position: relative;
+                        padding-bottom: 2px;
+                    }
+
+                    .contact-info a::after {
+                        content: '';
+                        position: absolute;
+                        bottom: -2px;
+                        left: 0;
+                        width: 100%;
+                        height: 1px;
+                        background: #00f2ff;
+                        transform: scaleX(0);
+                        transition: transform 0.3s ease;
+                    }
+
+                    .contact-info a:hover {
+                        color: #ff00e4;
+                        text-shadow: 0 0 10px rgba(255, 0, 228, 0.7);
+                    }
+
+                    .contact-info a:hover::after {
+                        transform: scaleX(1);
+                        background: #ff00e4;
+                    }
+
+                    .map-container {
+                        width: 100%;
+                        height: 400px;
+                        margin: 3rem auto;
+                        max-width: 1200px;
+                        border: 2px solid rgba(0, 242, 255, 0.3);
+                        border-radius: 15px;
+                        overflow: hidden;
+                        box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
+                        transition: all 0.3s ease;
+                    }
+
+                    .map-container:hover {
+                        border-color: rgba(0, 242, 255, 0.8);
+                        box-shadow: 0 0 40px rgba(0, 242, 255, 0.3);
+                    }
+
+                    @keyframes titlePulse {
+                        0%, 100% { 
+                            text-shadow: 0 0 20px rgba(0, 242, 255, 0.8),
+                                       0 0 40px rgba(0, 242, 255, 0.4);
+                        }
+                        50% { 
+                            text-shadow: 0 0 30px rgba(0, 242, 255, 0.9),
+                                       0 0 50px rgba(0, 242, 255, 0.5);
+                        }
+                    }
+
+                    @media (max-width: 992px) {
+                        .contact-grid {
+                            grid-template-columns: repeat(2, 1fr);
+                        }
+                        .contact-title {
+                            font-size: 3.5rem;
+                        }
+                    }
+
+                    @media (max-width: 768px) {
+                        .contact-grid {
+                            grid-template-columns: 1fr;
+                        }
+                        .contact-title {
+                            font-size: 3rem;
+                            letter-spacing: 6px;
+                        }
+                        .contact {
+                            padding: 4rem 1rem;
+                        }
+                    }
+                </style>
+
+                <h2 class="contact-title">CONTACT US</h2>
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <h3>Email Us</h3>
+                        <div class="contact-info">
+                            <a href="mailto:epulz2k25@gmail.com">epulz2k25@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <h3>Location</h3>
+                        <div class="contact-info">
+                            ECE Seminar Hall<br>
+                            TPGIT, Vellore
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <h3>Call Us</h3>
+                        <div class="contact-info">
+                            R. Harish: <a href="tel:+919345648844">+91 93456 48844</a><br>
+                            P. Nithish Kumar: <a href="tel:+918072698494">+91 80726 98494</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="map-container">
+                    <div class="map-frame">
+                        <div class="map-overlay">
+                            <h3 class="map-title">Our Location</h3>
+                            <p class="map-address">Thanthai Periyar Government Institute of Technology</p>
+                            <p class="map-subaddress">Vellore - 632002, Tamil Nadu</p>
+                        </div>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.5909047884447!2d79.37589661482183!3d12.931755090884144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bad39a0f03f8f8f%3A0x7f0c74fe67f697fa!2sThanthai%20Periyar%20Government%20Institute%20of%20Technology!5e0!3m2!1sen!2sin!4v1645548922000!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+
+                <style>
+                    .map-container {
+                        width: 100%;
+                        max-width: 1200px;
+                        margin: 4rem auto;
+                        padding: 0 1rem;
+                        position: relative;
+                    }
+
+                    .map-frame {
+                        position: relative;
+                        width: 100%;
+                        height: 450px;
+                        border: 2px solid rgba(0, 242, 255, 0.3);
+                        border-radius: 15px;
+                        overflow: hidden;
+                        box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
+                        transition: all 0.4s ease;
+                    }
+
+                    .map-overlay {
+                        position: absolute;
+                        top: 20px;
+                        left: 20px;
+                        background: rgba(0, 0, 0, 0.9);
+                        padding: 25px 35px;
+                        border-radius: 15px;
+                        border: 2px solid rgba(0, 242, 255, 0.5);
+                        z-index: 2;
+                        transform: translateX(-120%);
+                        opacity: 0;
+                        animation: slideInFromLeft 0.8s ease forwards;
+                        box-shadow: 0 0 30px rgba(0, 242, 255, 0.3),
+                                  inset 0 0 20px rgba(255, 0, 228, 0.2);
+                        backdrop-filter: blur(8px);
+                        max-width: 90%;
+                    }
+
+                    .map-title {
+                        color: #00f2ff;
+                        font-family: 'Orbitron', sans-serif;
+                        font-size: 1.8rem;
+                        margin-bottom: 15px;
+                        text-shadow: 0 0 15px rgba(0, 242, 255, 0.7);
+                        animation: glowPulse 2s infinite;
+                    }
+
+                    .map-address {
+                        color: #fff;
+                        font-family: 'Exo', sans-serif;
+                        font-size: 1.3rem;
+                        margin-bottom: 8px;
+                        text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+                        font-weight: 600;
+                        letter-spacing: 1px;
+                        animation: fadeInUp 0.5s ease 0.3s forwards;
+                    }
+
+                    .map-subaddress {
+                        color: rgba(255, 255, 255, 0.9);
+                        font-family: 'Exo', sans-serif;
+                        font-size: 1.1rem;
+                        animation: fadeInUp 0.5s ease 0.5s forwards;
+                        text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+                    }
+
+                    @keyframes slideInFromLeft {
+                        0% {
+                            transform: translateX(-120%);
+                            opacity: 0;
+                        }
+                        100% {
+                            transform: translateX(0);
+                            opacity: 1;
+                        }
+                    }
+
+                    @keyframes glowPulse {
+                        0%, 100% { text-shadow: 0 0 15px rgba(0, 242, 255, 0.7); }
+                        50% { text-shadow: 0 0 25px rgba(0, 242, 255, 0.9), 0 0 40px rgba(0, 242, 255, 0.5); }
+                    }
+
+                    @keyframes fadeInUp {
+                        from {
+                            opacity: 0;
+                            transform: translateY(20px);
+                        }
+                        to {
+                            opacity: 1;
+                            transform: translateY(0);
+                        }
+                    }
+
+                    .map-frame:hover .map-overlay {
+                        border-color: rgba(255, 0, 228, 0.6);
+                        box-shadow: 0 0 40px rgba(0, 242, 255, 0.4),
+                                  inset 0 0 30px rgba(255, 0, 228, 0.3);
+                        transform: translateY(-5px);
+                        transition: all 0.4s ease;
+                    }
+                    .map-overlay {
+                        position: absolute;
+                        top: 20px;
+                        left: 20px;
+                        background: rgba(0, 0, 0, 0.85);
+                        padding: 20px 30px;
+                        border-radius: 10px;
+                        border: 1px solid rgba(0, 242, 255, 0.3);
+                        z-index: 2;
+                        transform: translateY(-100%);
+                        opacity: 0;
+                        animation: slideIn 0.5s ease forwards;
+                        box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+                    }
+
+                    .map-title {
+                        color: #00f2ff;
+                        font-family: 'Orbitron', sans-serif;
+                        font-size: 1.5rem;
+                        margin-bottom: 10px;
+                        text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+                    }
+
+                    .map-address {
+                        color: #fff;
+                        font-family: 'Exo', sans-serif;
+                        font-size: 1.1rem;
+                        margin-bottom: 5px;
+                        text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+                    }
+
+                    .map-subaddress {
+                        color: rgba(255, 255, 255, 0.8);
+                        font-family: 'Exo', sans-serif;
+                        font-size: 0.9rem;
+                    }
+
+                    .map-frame::before {
+                        content: '';
+                        position: absolute;
+                        inset: 0;
+                        border: 1px solid rgba(255, 0, 228, 0.2);
+                        border-radius: 15px;
+                        pointer-events: none;
+                        z-index: 1;
+                        animation: borderPulse 2s infinite;
+                    }
+
+                    .map-frame:hover {
+                        transform: translateY(-5px);
+                        border-color: rgba(0, 242, 255, 0.8);
+                        box-shadow: 0 0 40px rgba(0, 242, 255, 0.3),
+                                  0 0 60px rgba(255, 0, 228, 0.2);
+                    }
+
+                    .map-frame iframe {
+                        width: 100%;
+                        height: 100%;
+                        border: none;
+                        filter: grayscale(0.5) contrast(1.2);
+                        transition: all 0.4s ease;
+                    }
+
+                    .map-frame:hover iframe {
+                        filter: grayscale(0) contrast(1.1);
+                    }
+
+                    @keyframes slideIn {
+                        to {
+                            transform: translateY(0);
+                            opacity: 1;
+                        }
+                    }
+
+                    @keyframes borderPulse {
+                        0%, 100% { border-color: rgba(255, 0, 228, 0.2); }
+                        50% { border-color: rgba(0, 242, 255, 0.4); }
+                    }
+
+                    @media (max-width: 768px) {
+                        .map-frame {
+                            height: 350px;
+                        }
+                        .map-overlay {
+                            padding: 15px 20px;
+                        }
+                        .map-title {
+                            font-size: 1.2rem;
+                        }
+                        .map-address {
+                            font-size: 1rem;
+                        }
+                    }
+                </style>
+
+                <div class="cyber-divider"></div>
+            </section>
+
+            <!-- Footer starts here -->
+            <footer class="footer" data-scroll-section>
+                <style>
+                    .footer {
+                        background: linear-gradient(to bottom, #0a0a0a, #111);
+                        padding: 4rem 2rem;
+                        position: relative;
+                        overflow: hidden;
+                    }
+
+                    .scanline-background {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: repeating-linear-gradient(
+                            0deg,
+                            rgba(0, 242, 255, 0.03) 0px,
+                            rgba(0, 242, 255, 0.03) 1px,
+                            transparent 1px,
+                            transparent 2px
+                        );
+                        pointer-events: none;
+                    }
+
+                    .footer-content {
+                        position: relative;
+                        z-index: 2;
+                        text-align: center;
+                        max-width: 1200px;
+                        margin: 0 auto;
+                    }
+
+                    .footer-logo {
+                        margin: 4rem 0 3rem;
+                        transform: translateY(10px);
+                    }
+
+                    .logo-text {
+                        font-family: 'Orbitron', sans-serif;
+                        font-size: 2.5rem;
+                        font-weight: 700;
+                        letter-spacing: 4px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 5px;
+                    }
+
+                    .cyan-text {
+                        color: #00f2ff;
+                        text-shadow: 0 0 15px rgba(0, 242, 255, 0.7);
+                        animation: cyberPulse 2s infinite;
+                    }
+
+                    .magenta-text {
+                        color: #ff00e4;
+                        text-shadow: 0 0 15px rgba(255, 0, 228, 0.7);
+                        animation: cyberPulse 2s infinite;
+                    }
+
+                    @keyframes cyberPulse {
+                        0%, 100% {
+                            text-shadow: 0 0 15px currentColor;
+                        }
+                        50% {
+                            text-shadow: 0 0 25px currentColor;
+                        }
+                    }
+
+                    @media (max-width: 768px) {
+                        .footer-logo {
+                            margin: 3rem 0 2rem;
+                        }
+                        .logo-text {
+                            font-size: 2rem;
+                        }
+                    }
+                </style>
+
+                <div class="scanline-background"></div>
+                <div class="footer-content">
+                    <div class="footer-logo">
+                        <div class="logo-text">
+                            <span class="cyan-text">EPUL</span><span class="magenta-text">Z'25</span>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://instagram.com/epulz_2k25" class="social-icon" target="_blank" data-tilt>
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://linkedin.com/school/tpgit/" class="social-icon" target="_blank" data-tilt>
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="mailto:epulz2k25@gmail.com" class="social-icon" target="_blank" data-tilt>
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                    <div class="footer-contact">
+                        <p><i class="fas fa-map-marker-alt"></i> ECE Seminar Hall, TPGIT, Vellore</p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:epulz2k25@gmail.com">epulz2k25@gmail.com</a></p>
+                        <p><i class="fas fa-phone-alt"></i> Harish: <a href="tel:+919345648844">+91 93456 48844</a> | Nithish: <a href="tel:+918072698494">+91 80726 98494</a></p>
+                    </div>
+                    <p class="copyright">© 2025 EPULZ. All rights reserved.</p>
+                </div>
+
+                <style>
+                    .footer-logo {
+                        margin-bottom: 2rem;
+                    }
+
+                    .logo-text {
+                        font-family: 'Orbitron', sans-serif;
+                        font-size: 3rem;
+                        font-weight: 700;
+                        letter-spacing: 4px;
+                    }
+
+                    .cyan-text {
+                        color: #00f2ff;
+                        text-shadow: 0 0 15px rgba(0, 242, 255, 0.7);
+                    }
+
+                    .magenta-text {
+                        color: #ff00e4;
+                        text-shadow: 0 0 15px rgba(255, 0, 228, 0.7);
+                    }
+
+                    .social-icon {
+                        font-size: 2.5rem;
+                        color: #00f2ff;
+                        transition: all 0.3s ease;
+                        filter: drop-shadow(0 0 10px rgba(0, 242, 255, 0.5));
+                    }
+
+                    .social-icon:hover {
+                        color: #ff00e4;
+                        transform: translateY(-5px) scale(1.1);
+                        filter: drop-shadow(0 0 15px rgba(255, 0, 228, 0.7));
+                    }
+
+                    .footer-contact i {
+                        color: #00f2ff;
+                        margin-right: 10px;
+                        text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+                    }
+                </style>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/grid.js"></script>
+    <script src="js/about-animations.js"></script>
+    <script src="js/loader.js"></script>
+    <script src="js/background.js"></script>
+    <script src="js/cityscape.js"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/smooth-scroll.js"></script>
+    <script src="js/events.js"></script>
+    <script src="js/forms.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/timeline.js"></script>
+    <script src="js/social.js"></script>
+    <script src="js/cursor.js"></script>
+    <script src="js/audio-visualizer.js"></script>
+    <script src="js/parallax.js"></script>
+
+    <!-- Social Menu -->
+    <div class="social-menu"></div>
+    <!-- Before closing body tag -->
+    <script src="js/countdown.js"></script>
+</body>
+</html>
+
+<style>
+    .event-icon {
+        font-size: 3.5rem;
+        color: #00f2ff;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        transition: all 0.3s ease;
+        animation: iconGlow 2s infinite;
+    }
+
+    .event-card:hover .event-icon {
+        color: #ff00e4;
+        transform: scale(1.1);
+    }
+
+    @keyframes iconGlow {
+        0%, 100% { text-shadow: 0 0 20px rgba(0, 242, 255, 0.5); }
+        50% { text-shadow: 0 0 30px rgba(255, 0, 228, 0.7); }
+    }
+</style>

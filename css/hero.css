@@ -1,0 +1,345 @@
+/* Hero Section */
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--bg-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Grid Canvas */
+#grid-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* Hero Content */
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Logo */
+.hero-logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 6rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+.logo-part.cyan {
+    color: var(--primary-color);
+    animation: glowCyan 2s infinite alternate;
+}
+
+.logo-part.magenta {
+    color: var(--secondary-color);
+    animation: glowMagenta 2s infinite alternate;
+}
+
+/* Description */
+.hero-description {
+    font-family: 'Exo', sans-serif;
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin-bottom: 3rem;
+    line-height: 1.6;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Countdown Container */
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+/* Countdown Rings */
+.countdown-ring {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.ring-circle {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px solid;
+    border-radius: 50%;
+    animation: rotateRing 10s linear infinite;
+}
+
+.days .ring-circle { border-color: var(--primary-color); }
+.hours .ring-circle { border-color: var(--secondary-color); }
+.minutes .ring-circle { border-color: var(--accent-color); }
+.seconds .ring-circle { border-color: var(--highlight-color); }
+
+.ring-number {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-light);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.ring-label {
+    font-family: 'Exo', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-top: 0.5rem;
+    letter-spacing: 2px;
+}
+
+/* Register Button */
+.register-button {
+    position: relative;
+    display: inline-block;
+    padding: 1rem 3rem;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+    color: var(--text-light);
+    text-decoration: none;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    border: none;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.register-button::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    z-index: -1;
+    filter: blur(10px);
+}
+
+.button-text {
+    position: relative;
+    z-index: 1;
+}
+
+.button-glitch {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    mix-blend-mode: overlay;
+    animation: buttonGlitch 0.3s infinite;
+    opacity: 0;
+}
+
+/* Navigation */
+.main-nav {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    display: flex;
+    gap: 2rem;
+    z-index: 3;
+}
+
+.nav-link {
+    font-family: 'Exo', sans-serif;
+    font-size: 1rem;
+    color: var(--text-light);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--primary-color);
+    text-shadow: 0 0 10px var(--primary-color);
+}
+
+.nav-asterisk {
+    color: var(--secondary-color);
+    margin-left: 2px;
+}
+
+.nav-link.register {
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
+}
+
+/* Particles */
+.particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Animations */
+@keyframes glowCyan {
+    0% { text-shadow: 0 0 20px rgba(0, 255, 255, 0.5); }
+    100% { text-shadow: 0 0 40px rgba(0, 255, 255, 0.8); }
+}
+
+@keyframes glowMagenta {
+    0% { text-shadow: 0 0 20px rgba(255, 0, 255, 0.5); }
+    100% { text-shadow: 0 0 40px rgba(255, 0, 255, 0.8); }
+}
+
+@keyframes rotateRing {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes buttonGlitch {
+    0% { transform: translate(0); opacity: 0; }
+    25% { transform: translate(-5px, 5px); opacity: 0.5; }
+    50% { transform: translate(5px, -5px); opacity: 0.25; }
+    75% { transform: translate(-5px, -5px); opacity: 0.5; }
+    100% { transform: translate(0); opacity: 0; }
+}
+}
+
+/* Animations */
+@keyframes glowPulse {
+    0%, 100% {
+        text-shadow: 0 0 20px var(--primary-color);
+    }
+    50% {
+        text-shadow: 0 0 40px var(--primary-color);
+    }
+}
+
+@keyframes ringRotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes borderGlow {
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes scrollLine {
+    0% {
+        transform: scaleY(0);
+        transform-origin: top;
+    }
+    50% {
+        transform: scaleY(1);
+        transform-origin: top;
+    }
+    50.1% {
+        transform: scaleY(1);
+        transform-origin: bottom;
+    }
+    100% {
+        transform: scaleY(0);
+        transform-origin: bottom;
+    }
+}
+
+/* Mobile Responsiveness */
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-logo {
+        font-size: 4rem;
+    }
+
+    .hero-description {
+        font-size: 1rem;
+    }
+
+    .countdown-container {
+        gap: 1rem;
+    }
+
+    .countdown-ring {
+        width: 80px;
+        height: 80px;
+    }
+
+    .ring-number {
+        font-size: 1.8rem;
+    }
+
+    .main-nav {
+        display: none;
+    }
+}
+
+    .countdown-ring {
+        width: 80px;
+        height: 80px;
+    }
+
+    .ring-number {
+        font-size: 1.8rem;
+    }
+
+    .ring-label {
+        font-size: 0.8rem;
+        bottom: -25px;
+    }
+
+    .register-button {
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 2.5rem;
+        letter-spacing: 0.1em;
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+    }
+
+    .countdown-ring {
+        width: 60px;
+        height: 60px;
+    }
+
+    .ring-number {
+        font-size: 1.5rem;
+    }
+}

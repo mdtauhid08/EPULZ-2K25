@@ -1,0 +1,15 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .neon-stroke {
+      stroke: #00f0ff;
+      stroke-width: 2;
+      fill: none;
+      filter: drop-shadow(0 0 2px #00f0ff);
+    }
+  </style>
+  <path class="neon-stroke" d="M25 40h50v30H25z"/>
+  <circle class="neon-stroke" cx="35" cy="55" r="5"/>
+  <circle class="neon-stroke" cx="65" cy="55" r="5"/>
+  <path class="neon-stroke" d="M40 30l-5 10M60 30l5 10"/>
+  <path class="neon-stroke" d="M45 70v10M55 70v10"/>
+</svg>

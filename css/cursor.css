@@ -1,0 +1,213 @@
+/* Hide default cursor */
+body {
+    cursor: none;
+}
+
+/* Custom cursor container */
+.cursor-container {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    will-change: transform;
+}
+
+/* Main cursor dot */
+.cursor {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s;
+    mix-blend-mode: screen;
+    box-shadow: 0 0 10px var(--primary-color),
+                0 0 20px var(--primary-color);
+    will-change: transform, width, height;
+}
+
+/* Cursor trail */
+.cursor-trail {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+}
+
+.trail-dot {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: screen;
+    will-change: transform, opacity;
+}
+
+/* Cursor ring */
+.cursor-ring {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--secondary-color);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: all 0.15s ease-out;
+    mix-blend-mode: screen;
+    opacity: 0.5;
+    will-change: transform, width, height;
+}
+
+/* Cursor lines */
+.cursor-lines {
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    pointer-events: none;
+    transform: translate(-50%, -50%) rotate(0deg);
+    mix-blend-mode: screen;
+    opacity: 0.3;
+    will-change: transform;
+}
+
+.cursor-line {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50px;
+    height: 1px;
+    background: var(--primary-color);
+    transform-origin: 0 0;
+    will-change: transform;
+}
+
+.cursor-line:nth-child(1) { transform: rotate(0deg); }
+.cursor-line:nth-child(2) { transform: rotate(90deg); }
+.cursor-line:nth-child(3) { transform: rotate(180deg); }
+.cursor-line:nth-child(4) { transform: rotate(270deg); }
+
+/* Hover states */
+.cursor-container.hover .cursor {
+    width: 12px;
+    height: 12px;
+    background: var(--secondary-color);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cursor-container.hover .cursor-ring {
+    width: 50px;
+    height: 50px;
+    border-color: var(--secondary-color);
+    opacity: 0.8;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cursor-container.hover .cursor-lines {
+    transform: translate(-50%, -50%) rotate(45deg);
+    opacity: 0.5;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Click animation */
+.cursor-container.clicking .cursor {
+    transform: translate(-50%, -50%) scale(0.8);
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cursor-container.clicking .cursor-ring {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.2;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Glitch effect on hover */
+@keyframes cursorGlitch {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        filter: hue-rotate(0deg);
+    }
+    25% {
+        transform: translate(-52%, -48%) scale(1.1);
+        filter: hue-rotate(90deg);
+    }
+    50% {
+        transform: translate(-48%, -52%) scale(0.9);
+        filter: hue-rotate(180deg);
+    }
+    75% {
+        transform: translate(-51%, -49%) scale(1.2);
+        filter: hue-rotate(270deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        filter: hue-rotate(360deg);
+    }
+}
+
+.cursor-container.hover .cursor {
+    animation: cursorGlitch 1s infinite;
+}
+
+
+/* Event card cursor interactions */
+.event-card:hover ~ .cursor-container .cursor {
+    width: 16px;
+    height: 16px;
+    background: var(--accent-color);
+    box-shadow: 0 0 20px var(--accent-color);
+}
+
+.event-card:hover ~ .cursor-container .cursor-ring {
+    width: 60px;
+    height: 60px;
+    border-color: var(--accent-color);
+    opacity: 0.8;
+    animation: pulseRing 1.5s infinite;
+}
+
+@keyframes pulseRing {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.1); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Technical Events cursor effects */
+.technical .event-card:hover ~ .cursor-container .cursor {
+    --event-color: #00ffff;
+    background: var(--event-color);
+    box-shadow: 0 0 20px var(--event-color);
+}
+
+/* Non-Technical Events cursor effects */
+.non-technical .event-card:hover ~ .cursor-container .cursor {
+    --event-color: #ff00ff;
+    background: var(--event-color);
+    box-shadow: 0 0 20px var(--event-color);
+}
+
+/* Event-specific cursor animations */
+.event-card[data-event="techtalk-titans"]:hover ~ .cursor-container .cursor-lines {
+    transform: translate(-50%, -50%) rotate(45deg) scale(1.2);
+}
+
+.event-card[data-event="prototype-parade"]:hover ~ .cursor-container .cursor {
+    animation: prototypeGlitch 0.8s infinite;
+}
+
+.event-card[data-event="bug-slay"]:hover ~ .cursor-container .cursor-ring {
+    border-style: dashed;
+    animation: rotateRing 2s linear infinite;
+}
+
+@keyframes rotateRing {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes prototypeGlitch {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.2); }
+}
